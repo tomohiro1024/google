@@ -21,12 +21,19 @@ class MapSample extends StatefulWidget {
   State<MapSample> createState() => MapSampleState();
 }
 
-class MapSampleState extends State<MapSample> {q
+class MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
+  );
+
+  static final Marker _kGooglePlexMarker = Marker(
+    markerId: MarkerId('_kGooglePlex'),
+    infoWindow: InfoWindow(title: 'Google Plex'),
+    icon: BitmapDescriptor.defaultMarker,
+    position: LatLng(37.42796133580664, -122.085749655962),
   );
 
   static final CameraPosition _kLake = CameraPosition(
@@ -39,7 +46,8 @@ class MapSampleState extends State<MapSample> {q
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
-        mapType: MapType.hybrid,
+        mapType: MapType.normal,
+        markers: {_kGooglePlexMarker},
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
@@ -47,7 +55,7 @@ class MapSampleState extends State<MapSample> {q
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
-        label: Text('To the lake!'),
+        label: Text('拡大する'),
         icon: Icon(Icons.directions_boat),
       ),
     );
