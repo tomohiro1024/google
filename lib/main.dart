@@ -31,7 +31,7 @@ class MapSampleState extends State<MapSample> {
 
   static final Marker _kGooglePlexMarker = Marker(
     markerId: MarkerId('_kGooglePlex'),
-    infoWindow: InfoWindow(title: 'Google Plex'),
+    infoWindow: InfoWindow(title: '現在地'),
     icon: BitmapDescriptor.defaultMarker,
     position: LatLng(37.42796133580664, -122.085749655962),
   );
@@ -43,12 +43,20 @@ class MapSampleState extends State<MapSample> {
       zoom: 19.151926040649414);
 
   static final Marker _kLakeMarker = Marker(
-    markerId: MarkerId('_kGooglePlex'),
-    infoWindow: InfoWindow(title: 'Google Plex'),
+    markerId: MarkerId('_kLakeMarket'),
+    infoWindow: InfoWindow(title: '湖'),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
     position: LatLng(37.43296265331129, -122.08832357078792),
   );
 
+  static final Polyline _kPolyline = Polyline(
+      polylineId: PolylineId('_kPolyline'),
+      points: [
+        LatLng(37.42796133580664, -122.085749655962),
+        LatLng(37.43296265331129, -122.08832357078792),
+      ],
+      width: 4,
+      color: Colors.blueAccent);
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -57,6 +65,9 @@ class MapSampleState extends State<MapSample> {
         markers: {
           _kGooglePlexMarker,
           _kLakeMarker,
+        },
+        polylines: {
+          _kPolyline,
         },
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
