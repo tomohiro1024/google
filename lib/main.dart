@@ -42,12 +42,22 @@ class MapSampleState extends State<MapSample> {
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
+  static final Marker _kLakeMarker = Marker(
+    markerId: MarkerId('_kGooglePlex'),
+    infoWindow: InfoWindow(title: 'Google Plex'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+    position: LatLng(37.43296265331129, -122.08832357078792),
+  );
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
-        markers: {_kGooglePlexMarker},
+        markers: {
+          _kGooglePlexMarker,
+          _kLakeMarker,
+        },
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
